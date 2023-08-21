@@ -22,10 +22,14 @@ function createNonConsecutiveArray(count, gap) {
 const numbers = createNonConsecutiveArray(1000, 5); // Crea un array con 1000 números, con una diferencia mínima de 5 entre cada número consecutivo
 const numbersToSearch = [100, 155, 523, 750, 800];
 
+/* Approach: Usar metodo includes para ver si en el array se encuentra cierto numero y luego tuve que googlear como poder usar indexof en este caso.
+Si el array no tiene el numbero, return -1, si lo tiene return el index. */
 const binarySearch = (array, number) => {
-  if (array.includes(number)) {
-    return number;
+  if (!array.includes(number)) {
+    return -1;
   }
+  const index = array.indexOf(number);
+  return index;
 };
 
 numbersToSearch.forEach((number) => {
