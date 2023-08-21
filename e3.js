@@ -5,21 +5,27 @@
 */
 
 const original = {
-    name: 'John',
-    details: {
-      age: 30,
-      address: {
-        city: 'New York',
-        street: '123 Main St'
-      }
-    }
-  };
+  name: "John",
+  details: {
+    age: 30,
+    address: {
+      city: "New York",
+      street: "123 Main St",
+    },
+  },
+};
 
-  const deepClone = (obj) => { /* implementar tu código aquí */ };
-  
-  const clone = deepClone(original);
-  
-  console.log(clone !== original); // Debe imprimir true
-  console.log(clone.details !== original.details); // Debe imprimir true
-  console.log(clone.details.address !== original.details.address); // Debe imprimir true
-  console.log(clone.details.address.city === original.details.address.city); // Debe imprimir true
+const deepClone = (obj) => {
+  // First approach, convertir el obj en string y despues convertirlo en un nuevo objeto con json.parse
+  return JSON.parse(JSON.stringify(obj))
+
+  // Otra opcion es el structured clone, que es una funcion mas nueva (Y puede presentar fallos(?) quiza)
+  // return structuredClone(obj);
+};
+
+const clone = deepClone(original);
+
+console.log(clone !== original); // Debe imprimir true
+console.log(clone.details !== original.details); // Debe imprimir true
+console.log(clone.details.address !== original.details.address); // Debe imprimir true
+console.log(clone.details.address.city === original.details.address.city); // Debe imprimir true

@@ -7,29 +7,30 @@
     Cada vez que ejecutes esta prueba el array numbers se poblará de manera distinta, por lo que es normal que los resultados varíen entre cada prueba.
 */
 
-
 function createNonConsecutiveArray(count, gap) {
-    const array = [];
-    let currentNumber = 0;
+  const array = [];
+  let currentNumber = 0;
 
-    for (let i = 0; i < count; i++) {
-        array.push(currentNumber);
-        currentNumber += gap + Math.floor(Math.random() * 10); // Incrementa el número actual por el gap más un número aleatorio entre 0 y 9
-    }
+  for (let i = 0; i < count; i++) {
+    array.push(currentNumber);
+    currentNumber += gap + Math.floor(Math.random() * 10); // Incrementa el número actual por el gap más un número aleatorio entre 0 y 9
+  }
 
-    return array;
+  return array;
 }
 
 const numbers = createNonConsecutiveArray(1000, 5); // Crea un array con 1000 números, con una diferencia mínima de 5 entre cada número consecutivo
 const numbersToSearch = [100, 155, 523, 750, 800];
 
-const binarySearch = (array, number) => { /* implementar tu código aquí */ };
+const binarySearch = (array, number) => {
 
-numbersToSearch.forEach(number => {
-    const found = binarySearch(numbers, number);
-    if (found === -1) {
-        console.log(`El número ${number} no fue encontrado`);
-    } else {
-        console.log(`El número ${number} fue encontrado en la posición ${found}`);
-    }
+};
+
+numbersToSearch.forEach((number) => {
+  const found = binarySearch(numbers, number);
+  if (found === -1) {
+    console.log(`El número ${number} no fue encontrado`);
+  } else {
+    console.log(`El número ${number} fue encontrado en la posición ${found}`);
+  }
 });
