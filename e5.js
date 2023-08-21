@@ -24,12 +24,34 @@ const numbersToSearch = [100, 155, 523, 750, 800];
 
 /* Approach: Usar metodo includes para ver si en el array se encuentra cierto numero y luego tuve que googlear como poder usar indexof en este caso.
 Si el array no tiene el numbero, return -1, si lo tiene return el index. */
-const binarySearch = (array, number) => {
+
+/*const binarySearch = (array, number) => {
   if (!array.includes(number)) {
     return -1;
   }
   const index = array.indexOf(number);
   return index;
+};
+*/
+
+const binarySearch = (array, number) => {
+  if (typeof number === "undefined") {
+    return -1;
+  }
+  let start = 0,
+    end = array.length - 1;
+
+  while (start <= end) {
+    let mid = Math.floor((start + end) / 2);
+    if (array[mid] === number) {
+      return mid;
+    } else if (array[mid] < number) {
+      start = mid + 1;
+    } else {
+      end = mid - 1;
+    }
+  }
+  return -1;
 };
 
 numbersToSearch.forEach((number) => {
