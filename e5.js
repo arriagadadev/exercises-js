@@ -23,7 +23,9 @@ const numbers = createNonConsecutiveArray(1000, 5); // Crea un array con 1000 nÃ
 const numbersToSearch = [100, 155, 523, 750, 800];
 
 const binarySearch = (array, number) => {
-
+  if (array.includes(number)) {
+    return number;
+  }
 };
 
 numbersToSearch.forEach((number) => {
