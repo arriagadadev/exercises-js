@@ -36,19 +36,31 @@ const employees = [
   { name: "Diego", lastName: "Ortiz", companyId: 15 },
 ];
 
-// expected result = "Francisco Gomez-Twitter"
-// What to do, iterate through the array and extract the name, lastName and associate the companyId to the id of the company.
-/* Aqui estamos usando un for of loop para iterar por todos los empleados  y dentro creamos una variable para encontrar en companies solo las que tengan el mismo id con employees
-entonces, despues, si hubo un match if company, imprimimos la informacion. (Tuve que googlear aqui porque no me estaba saliendo.)
-*/
-const sortEmployees = () => {
-  for (const employee of employees) {
-    const company = companies.find((c) => c.id === employee.companyId);
+/*Creamos una funcion auxiliar que va a retornarnos el company name, chequeando antes si el company.id y companyId que pasamos como argumento son el mismo, solo va a retornar ese nombre. */
 
-    if (company) {
-      console.log(`${employee.name} ${employee.lastName}-${company.name}`);
+const getCompanyName = (companyId) => {
+  try {
+    for (const company of companies) {
+      if (company.id === companyId) {
+        return company.name;
+      }
     }
+  } catch (error) {
+    return error.message;
   }
 };
 
-sortEmployees();
+/* Aqui la variable getEmployees usa la funcion auxuliar getCompanyName y pasa como argumento el companyId del empleado, el cual sera usado por la funcion auxiliar.*/
+const getEmployeesInformation = (employees) => {
+  const employeesInformation = [];
+  employees.forEach((employee) => {
+    employeesInformation.push(
+      `${employee.name} ${employee.lastName}-${getCompanyName(
+        employee.companyId
+      )}`
+    );
+  });
+  return employeesInformation;
+};
+
+console.log(getEmployeesInformation(employees));

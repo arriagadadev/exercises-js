@@ -16,11 +16,7 @@ const original = {
 };
 
 const deepClone = (obj) => {
-  // First approach, convertir el obj en string y despues convertirlo en un nuevo objeto con json.parse
-  return JSON.parse(JSON.stringify(obj))
 
-  // Otra opcion es el structured clone, que es una funcion mas nueva (Y puede presentar fallos(?) quiza)
-  // return structuredClone(obj);
 };
 
 const clone = deepClone(original);

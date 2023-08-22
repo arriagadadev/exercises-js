@@ -12,32 +12,31 @@ const array = [
   { a: 7, b: 0, operation: "/" },
 ];
 
-const mathOperation = (array) => {
-  //  First approach,loop hell jaja
 
-  for (let i = 0; i < array.length; i++) {
-    if (array[i].b === 0) {
-      console.log(0);
-    } else if (array[i].operation === "+") {
-      console.log(array[i].a + array[i].b);
-    } else if (array[i].operation === "-") {
-      console.log(array[i].a - array[i].b);
-    } else if (array[i].operation === "*") {
-      console.log(array[i].a * array[i].b);
-    } else if (array[i].operation === "/") {
-      console.log(array[i].a / array[i].b);
-    }
+/* Approach: crear un objeto que tiene varios metodos y estos van a ser llamados por la variable calculate*/
 
-    // Second approach, tuve que googlear como poder usar el + en esta situacion, y llegue al metodo eval()
+const operations = {
+  "+": (a, b) => a + b,
+  "-": (a, b) => a - b,
+  "*": (a, b) => a * b,
+  "/": (a, b) => (b === 0 ? "Division not allowed" : a / b),
+};
 
-    //   if (array[i].b !== 0) {
-    //     let newArr = eval(array[i].a + array[i].operation + array[i].b);
-    //     console.log(newArr);
-    //   } else {
-    //     console.log(0);
-    //   }
-    // }
+/* Calculate, tiene un parametro que es dado despues en el forEach loop, retornamos el objeto operations pero que nos llevaria a cada operation del array y despues al operation lo que nos 
+llevaria a los distintos metodos en operations y despues se pasan como argumentos a y b de el array para el metodo de operations*/
+const calculate = (operation) => {
+  try {
+    return operations[operation.operation](operation.a, operation.b);
+  } catch (error) {
+    return error.message;
   }
 };
 
-mathOperation(array);
+/* Se llama un forEach loop en el array que va a chequear cada elemento para asi poder usar la funcion calculate, que toma como argumento cada operation.*/
+array.forEach((operation) => {
+  console.log(
+    `The result of ${operation.a} ${operation.operation} ${
+      operation.b
+    } is: ${calculate(operation)} `
+  );
+});

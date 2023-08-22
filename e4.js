@@ -33,22 +33,23 @@ const people = [
   { id: 26, name: "Zachary", lastName: "Taylor" },
 ];
 
-/* Approach: For loop para iterar el array people y si el id es igual al id dado, imprimir name y lastname. En este caso especifico no es necesario hacer sort
-porque los id's ya van de forma ascendente, pero en caso de estar desordenados, se puede usar la HoF sort para organizarlos y poder usarlos (En este caso se usa una shallow copy para no mutar array
-    original.) */
-const getFullName = (id) => {
-  let sortedArr = [...people.sort((a, b) => a.id - b.id)];
+/* Tenemos una funcion que recibe el id de la persona y despues chequea si el id que pasamos como argumento es igual al id de la persona, entonces solo ahi retornamos el nombre y apellido.*/
 
-  for (let index = 0; index < people.length; index++) {
-    const element = sortedArr[index];
-    if (element.id === id) {
-      return `${element.name} ${element.lastName}`;
+const getFullName = (id) => {
+  try {
+    for (const person of people) {
+      if (id === person.id) {
+        return `${person.name} ${person.lastName}`;
+      }
     }
+    return "No existe ninguna persona con el id especificado";
+  } catch (error) {
+    console.log(error);
   }
-  return "No existe ninguna persona con el id especificado";
 };
+
 console.log(getFullName(1)); // Alice Johnson
 console.log(getFullName(5)); // Emily Clark
 console.log(getFullName(15)); // Oscar Hill
 console.log(getFullName(26)); // Zachary Taylor
-console.log(getFullName(100)); // No existe ninguna persona con el id especificado
+console.log(getFullName(100)); //
