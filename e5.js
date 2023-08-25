@@ -7,29 +7,58 @@
     Cada vez que ejecutes esta prueba el array numbers se poblará de manera distinta, por lo que es normal que los resultados varíen entre cada prueba.
 */
 
-
 function createNonConsecutiveArray(count, gap) {
-    const array = [];
-    let currentNumber = 0;
+  const array = [];
+  let currentNumber = 0;
 
-    for (let i = 0; i < count; i++) {
-        array.push(currentNumber);
-        currentNumber += gap + Math.floor(Math.random() * 10); // Incrementa el número actual por el gap más un número aleatorio entre 0 y 9
-    }
+  for (let i = 0; i < count; i++) {
+    array.push(currentNumber);
+    currentNumber += gap + Math.floor(Math.random() * 10); // Incrementa el número actual por el gap más un número aleatorio entre 0 y 9
+  }
 
-    return array;
+  return array;
 }
 
 const numbers = createNonConsecutiveArray(1000, 5); // Crea un array con 1000 números, con una diferencia mínima de 5 entre cada número consecutivo
 const numbersToSearch = [100, 155, 523, 750, 800];
 
-const binarySearch = (array, number) => { /* implementar tu código aquí */ };
+/* Approach: Usar metodo includes para ver si en el array se encuentra cierto numero y luego tuve que googlear como poder usar indexof en este caso.
+Si el array no tiene el numbero, return -1, si lo tiene return el index. */
 
-numbersToSearch.forEach(number => {
-    const found = binarySearch(numbers, number);
-    if (found === -1) {
-        console.log(`El número ${number} no fue encontrado`);
+/*const binarySearch = (array, number) => {
+  if (!array.includes(number)) {
+    return -1;
+  }
+  const index = array.indexOf(number);
+  return index;
+};
+*/
+
+const binarySearch = (array, number) => {
+  if (typeof number === "undefined") {
+    return -1;
+  }
+  let start = 0,
+    end = array.length - 1;
+
+  while (start <= end) {
+    let mid = Math.floor((start + end) / 2);
+    if (array[mid] === number) {
+      return mid;
+    } else if (array[mid] < number) {
+      start = mid + 1;
     } else {
-        console.log(`El número ${number} fue encontrado en la posición ${found}`);
+      end = mid - 1;
     }
+  }
+  return -1;
+};
+
+numbersToSearch.forEach((number) => {
+  const found = binarySearch(numbers, number);
+  if (found === -1) {
+    console.log(`El número ${number} no fue encontrado`);
+  } else {
+    console.log(`El número ${number} fue encontrado en la posición ${found}`);
+  }
 });
